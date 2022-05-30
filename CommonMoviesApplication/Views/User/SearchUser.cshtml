@@ -1,0 +1,204 @@
+﻿@model UserRequests
+@{
+    ViewData["Title"] = "SearchUser";
+    ViewData["Session"] = Model.ToUser.Nickname;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/SearchUser.css" type="text/css" />
+</head>
+<body>
+    <div class="row">
+        <div class="col">
+
+            <div class="title">
+                <h3>Pending Requests</h3>
+            </div>
+            @if (Model.RequestsUser.Count > 0)
+            {
+                <div class="div-table" style="display:flex; justify-content: center">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">User Nickname</th>
+                                <th scope="col">Request</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @foreach (var item in Model.RequestsUser)
+                                {
+                                    <td>@item.Nickname</td>
+                                    <td>
+                                        <span>
+                                            <i class="fa-solid fa-circle-check accept-req"
+                                               data-fromuser="@item.Nickname"
+                                               onclick="acceptRequest(this)"></i>
+                                        </span>
+                                        <span>
+                                            <i class="fa-solid fa-circle-xmark refuse-req"
+                                               data-fromuser="@item.Nickname"
+                                               onclick="refuseRequest(this)"></i>
+                                        </span>
+                                    </td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+            @if (Model.RequestsUser.Count == 0)
+            {
+                <div style="display: flex; justify-content: center; margin-top: 3rem;">
+                    <h4>There is no pending friend requests.</h4>
+                </div>
+            }
+        </div>
+        <div class="col">
+            <div style="margin-bottom: 10rem;">
+                <div class="title" style="display:flex; justify-content: center">
+                    <div class="col">
+                        <div class="row" style="display:flex; justify-content: center">
+                            <h3>My Friends</h3>
+                        </div>
+                        <div class="row" style="display:flex; justify-content: center">
+                            <p>Click to see common favourite movies with your friends.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-table" style="display:flex; justify-content: center">
+                    @foreach (var item in Model.MyFriends)
+                    {
+                        <div style="margin-right: 0.5rem;">
+                            <span class="badge badge-outline friend"
+                                  style="cursor: pointer"
+                                  data-friendid="@item.Id"
+                                  onclick="goToCommonMovies(this)">
+                                @item.Nickname
+                            </span>
+                        </div>
+                        @*<button type="submit"
+                                    class="badge badge-outline friend"
+                                    href="/Favourites/GetCommonFavouritesMovies/@item.Id"
+                                    href='@Url.ActionLink("SearchUser", "User" , new { friendId=@item.Id })'>
+                                @item.Nickname
+                            </button>*@
+                    }
+                </div>
+            </div>
+            <div>
+                <div class="title" style="display:flex; justify-content: center">
+                    <h3>Search User</h3>
+                </div>
+                <div class="inset">
+                    <p>
+                        <label for="user-nickname">Nickname</label>
+                        <input type="text" class="user-nickname" id="user-nickname">
+                    </p>
+                    <p class="p-container">
+                        <div class="div-button">
+                            <button class="btn btn-outline btn-lg add" type="submit" id="btnSearchUser">Add Friend</button>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+        function goToCommonMovies(element) {
+            var friendId = $(element).data('friendid');
+            window.location.href = "/Favourites/GetCommonFavouritesMovies?friendId=" + friendId;
+            @*$.ajax({
+                url: '@Url.Action("GetCommonFavouritesMovies", "Favourites")',
+                data: {
+                    friendId
+                },
+                method: "GET",
+                //success: (response) => {
+                //        /*window.location.href = "/Favourites/GetCommonFavouritesMovies";*/
+                //},
+                //error: (xhr) => {
+                //    console.log(xhr);
+                //}
+            })*@
+        }
+</script>
+
+@*<script type='text/javascript'>
+        $('#btnSearchUser').click(function (e) {
+            e.preventDefault();
+            searchUser();
+        });
+
+        function searchUser() {
+            var nickname = $("#user-nickname").val();
+
+            $.ajax({
+                url: '@Url.Action("SearchUser", "User")',
+                data: {
+                    nickname
+                },
+                method: "GET",
+                //success: (response) => {
+                //        window.location.href ="/Favourites/GetCommonFavouritesMovies";
+                //},
+                error: (xhr) => {
+                    console.log(xhr);
+                }
+            })
+        }
+    </script>*@
+
+<script>
+    function refuseRequest(element) {
+        var fromUser = $(element).data('fromuser');
+
+        $.ajax({
+            url: '@Url.Action("DeleteRequest", "User")',
+            data: {
+                fromUser
+            },
+            method: "DELETE",
+            success: (response) => {
+                if (response == true) {
+                    window.location.reload();
+                    //window.location.href = "/home/searchedmoviedetail";
+                }
+            },
+            error: (xhr) => {
+                console.log(xhr);
+            }
+        })
+    }
+
+    function acceptRequest(element) {
+        var fromUser = $(element).data('fromuser');
+
+        $.ajax({
+            url: '@Url.Action("AcceptRequest", "User")',
+            data: {
+                fromUser
+            },
+            method: "POST",
+            success: (response) => {
+                if (response == true) {
+                    window.location.reload();
+                }
+                if (response == false) {
+                    window.alert(response);
+                }
+            },
+            error: (xhr) => {
+                console.log(xhr);
+            }
+        })
+    }
+</script>

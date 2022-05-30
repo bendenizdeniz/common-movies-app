@@ -1,0 +1,171 @@
+﻿@import "compass/css3";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    color: white;
+    font-size: 12px;
+    background-image: url("https://images7.alphacoders.com/119/thumb-1920-1192080.jpg");
+}
+
+.login-title {
+    padding-top: 2rem;
+    padding-left: 3rem;
+    display: flex;
+    justify-content: start;
+    margin-top: 2rem;
+}
+
+    .login-title > h1 {
+        font-size: 5.5rem;
+        font-family: 'Brush Script MT', cursive;
+        color: #132a09;
+    }
+
+        .login-title > h1:hover {
+            cursor: context-menu;
+        }
+
+
+form {
+    background: #111;
+    width: 400px;
+    height: 870px;
+    margin: -70px auto 0px auto;
+    border-radius: 0.4em;
+    border: 1px solid #191919;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
+    opacity: 0.85;
+}
+
+    form:after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 1px;
+        width: 100px;
+        left: 20%;
+        background: linear-gradient(left, #111, #444, #b6b6b8, #444, #111);
+        top: 0;
+    }
+
+    form:before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 8px;
+        height: 5px;
+        border-radius: 50%;
+        left: 34%;
+        top: -7px;
+        box-shadow: 0 0 6px 4px #fff;
+    }
+
+.inset {
+    padding: 1rem 1rem -1rem 1rem;
+    border-top: 1px solid #19191a;
+}
+
+form h1 {
+    font-size: 20px;
+    text-shadow: 0 1px 0 black;
+    text-align: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,1);
+    position: relative;
+    color: #757171;
+}
+
+    form h1:after {
+        content: "";
+        display: block;
+        width: 250px;
+        height: 100px;
+        position: absolute;
+        top: 0;
+        left: 50px;
+        pointer-events: none;
+        transform: rotate(70deg);
+        background: linear-gradient(50deg, rgba(255,255,255,0.15), rgba(0,0,0,0));
+    }
+
+label {
+    color: #666;
+    display: block;
+    padding-bottom: 9px;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 8px 5px;
+    background: linear-gradient(#1f2124, #27292c);
+    border: 1px solid #222;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+    border-radius: 0.3em;
+    margin-bottom: 3px;
+    color: white;
+}
+
+.p-container {
+    padding: 0 20px 0 20px;
+}
+
+    .p-container:after {
+        clear: both;
+        display: table;
+        content: "";
+    }
+
+    .p-container span {
+        display: block;
+        float: left;
+        color: #0d93ff;
+        padding-top: 8px;
+    }
+
+
+input[type=text]:hover,
+input[type=password]:hover,
+label:hover ~ input[type=text],
+label:hover ~ input[type=password] {
+    background: #27292c;
+}
+
+.btn:hover {
+    width: 7rem;
+    height: 3.5rem;
+    color: white;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -10px 10px rgba(255,255,255,0.1);
+}
+
+.btn {
+    font-size: 1rem;
+    background-color: #18360c !important;
+    border-radius: 0.2rem;
+    color: white;
+    padding: 5px 20px;
+    margin-bottom: 4rem;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 10px 10px rgba(255,255,255,0.1);
+    color: white;
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.div-button {
+    display: flex;
+    justify-content: center;
+}
+
+.login-p {
+    color: white;
+    font-size: 0.7rem;
+}

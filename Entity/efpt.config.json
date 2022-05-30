@@ -1,0 +1,59 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "CommonmoviesapplicationContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Entity",
+   "ProjectRootNamespace": "Entity",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[FavouriteMovie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Friends]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Movie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Requests]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SearchedMovie]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[User]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DESKTOP-EMSG0FT.CommonMoviesApplication",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

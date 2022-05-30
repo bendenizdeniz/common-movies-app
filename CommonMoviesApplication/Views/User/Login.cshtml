@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/Login.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="login-title">
+        <h1>Common Movies</h1>
+    </div>
+    <form>
+        <h1>User Log in</h1>
+        <div class="inset">
+            <p>
+                <label for="email">Email</label>
+                <input type="text" id="email">
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" id="password">
+            </p>
+        </div>
+        <p class="p-container">
+            <div class="div-button">
+                <button class="btn btn-outline btn-lg" type="submit" id="btnSubmit">Log in</button>
+            </div>
+        </p>
+    </form>
+</body>
+</html>
+
+<script>
+    $('#btnSubmit').click(function (e) {
+        e.preventDefault();
+        login();
+    });
+
+    function login() {
+        var email = $("#email").val();
+        var password = $("#password").val();
+
+        $.ajax({
+            url: '@Url.Action("Login", "User")',
+            data: {
+                email,
+                password
+            },
+            method: "POST",
+            success: (response) => {
+                if (response == true) {
+                    window.location.href = "/Home/Index";
+                }
+                else if (response == false) {
+                    window.alert("Wrong Informations");
+                }
+            },
+            error: (xhr) => {
+                console.log(xhr);
+            }
+        })
+    }
+</script>
+

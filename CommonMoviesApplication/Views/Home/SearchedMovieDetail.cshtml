@@ -1,0 +1,68 @@
+﻿@model List<DashboardMovieModel>
+@{
+    ViewData["Title"] = "SearchedMovieDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewData["Session"] = Model.Nickname;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/Dashboard.css" type="text/css" />
+</head>
+
+<body>
+    <h1>Searched Movies</h1>
+    <div class="container movie-cont" style="display: flex; justify-content: center;">
+        @foreach (var item in Model)
+        {
+            <div class="movie m-2">
+                <div>
+                    <img src=@String.Format("{0}{1}", "https://image.tmdb.org/t/p/original", item.poster_path) alt="poster" />
+                    <div class="container">
+                        <div class="movie-info row">
+                            <div class="col-10">
+                                <h5 class="movie-title">@item.title</h5>
+                            </div>
+                            <div class="col-2">
+                                <span>@item.vote_average</span>
+                                <span style="background-color: transparent">
+                                    <i class="fa-brands fa-gratipay fa-2xl fav-icon pt-1"
+                                       aria-hidden="true"
+                                       data-title="@item.id"
+                                       onclick="sendFavouriteMovie(this)">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+<script type='text/javascript'>
+    function sendFavouriteMovie(element) {
+        var movieId = $(element).data('title');
+
+        $.ajax({
+            url: '@Url.Action("AddFavourite", "Home")',
+            data: {
+                movieId
+            },
+            method: "POST",
+            success: (response) => {
+                if (response==true) {
+                    //window.location.href = "/Home/SearchedMovieDetail";
+                }
+            },
+            error: (xhr) => {
+                console.log(xhr);
+            }
+        })
+    }
+</script>
